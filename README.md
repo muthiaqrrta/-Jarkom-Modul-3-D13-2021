@@ -261,7 +261,8 @@ Kemudian Restart squid dengan cara mengetikkan perintah: service squid restart
 
 3.**Pada Node Loguetown**
 `ping jualbelikapal.D13.com` untuk mengecek konfigurasi pembuatan domain, Lalu lakukan konfigurasi proxy dengan mengaktifkan proxy sebagai berikut **export http_proxy="http://ip-proxy-server:port"**. Menggunakan ip `export http_proxy="http://192.198.2.3:5000"` dan menggunakan domain `export http_proxy="http://jualbelikapal.D13.com:5000"` . Adapun untuk memeriksa apakah konfigurasi proxy pada client berhasil, silahkan lakukan perintah berikut `env | grep -i proxy`. Berikut merupakan hasil gambar pengecekannya:
-### Screenshoot no 8 yang export http proxy
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no8.jpeg">
 
 ## Nomor 9
 Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy. 
@@ -284,8 +285,16 @@ acl USERS proxy_auth REQUIRED
 http_access allow USERS
 ```
 3.dan Restart squid dengan `service squid restart`. Setelah itu bisa **Testing** dengan mencoba akses web http://its.ac.id dengan perintah lynx http://its.ac.id . Maka kemudian akan di arahkan ke halaman login, isikan dengan username & password yang telah dibuat.
-### Screenshoot no 9 yang itu password username ya muth sama ape namanye https its.ac.id km tolong lynx in
 
+Untuk username luffybelikapalD13 dengan password luffy_D13
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no9%201.jpeg">
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no9%202.jpeg">
+
+Untuk username zorobelikapalD13 dengan password zoro_D13
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no9%203.jpeg">
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no9%204.jpeg">
 
 ## Nomor 10
 Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00) (10).
@@ -309,7 +318,9 @@ http_access allow USERS AVAILABLE_WORKING_3
 
 4. Kemudian tak lupa lakukan restart squid dengan perintah `service squid restart`. 
 5. Setelah itu mencoba untuk mengakses web http://its.ac.id atau google.com diluar waktu yang dibatasi. Maka akan muncul halaman error sebagai berikut
-### SCREENSHOOT ITU NGEAKSES YG FORBIDDEN INI BISA GOOGLE/ITS TERSERAH 
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no10%201.jpeg">
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no10%202.jpeg">
 
 ## Nomor 11
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie .
@@ -356,6 +367,9 @@ wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main
 unzip -o /root/super.franky.zip -d  /root
 cp -r /root/super.franky/. /var/www/super.franky.D13.com/
 ```
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no11%201.jpeg">
+
 Kemudian menambahkan konfigurasi pada `/etc/apache2/sites-available/super.franky.t07.com.conf`,
 ```
 <VirtualHost *:80>
@@ -403,8 +417,8 @@ http_reply_access deny site
 #http_access deny all
 ```
 Melakukan restart service squid dengan `service squid restart`. Setelah itu mencoba `lynx google.com` atau `lynx super.franky.D13.com` pada **Node Loguetown**:
-### SCREENSHOT LYNX GOOGLE ATO SUPERFRANKY LALALA YG BERHASIL
 
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no11%202.jpeg">
 
 
 ## Nomor 12 dan 13
@@ -441,11 +455,11 @@ delay_access 2 deny all
 
 3. Melakukan restart squid dengan perintah `service squid restart`. Kemudian mencoba cek konfigurasi dengan mengakses halaman super.franky.a06.com melalui perintah `lynx super.franky.D13.com` pada **Node Loguetown** dengan username *luffybelikapalD13 dengan password luffy_D13* untuk nomor 12, dan username *zorobelikapalD13 dengan password zoro_D13* untuk cek nomor 13.
 
-Testing Nomor 12
+**Testing Nomor 12**
 
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no12.jpeg">
 
-Testing Nomor 13
+**Testing Nomor 13**
 
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no13.jpeg">
 
