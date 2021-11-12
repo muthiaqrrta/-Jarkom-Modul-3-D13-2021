@@ -219,11 +219,12 @@ Buka file /etc/bind/named.conf.options dan tambahkan forwarders
 forwarders {
        	192.168.122.1;
 };
-
 ```
 
 Lalu start bind dengan perintah `service bind9 restart`
 
+Lakukan testing dengan perintah `ip a`
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/ip%20a%20skypie.jpeg">
 
 ## Nomor 8
 Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
