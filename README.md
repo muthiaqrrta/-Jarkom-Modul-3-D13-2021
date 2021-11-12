@@ -93,6 +93,8 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
 6. Lalu masukkan `echo nameserver 192.168.122.1 > /etc/resolv.conf` pada semua console node.
 7. Kemudian test ping google.com
 
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/ping%20google.jpeg">
+
 ### Instalasi
 - Foosha
 
