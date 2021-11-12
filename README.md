@@ -314,7 +314,7 @@ http_access allow USERS AVAILABLE_WORKING_3
 ## Nomor 11
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie .
 
-#### ** Pada Node Ennieslobby**
+#### ** Pada Node Ennieslobby **
 1.  jalankan `vi /etc/bind/named.conf.local`dan tambahkan konfigurasi sebagai berikut,
 ```
 zone "super.franky.D13.com" {
@@ -342,7 +342,7 @@ WWW	IN	CNAME	super.franky.D13.com.
 
 4. Melakukan restart bind dengan perintah `service bind9 restart`
 
-#### ** Pada Node Skypie**
+#### **Pada Node Skypie**
 Melakukan install apache2, wget, unzip dengan perintah
 ```
 apt-get update
@@ -441,6 +441,12 @@ delay_access 2 deny all
 
 3. Melakukan restart squid dengan perintah `service squid restart`. Kemudian mencoba cek konfigurasi dengan mengakses halaman super.franky.a06.com melalui perintah `lynx super.franky.D13.com` pada **Node Loguetown** dengan username *luffybelikapalD13 dengan password luffy_D13* untuk nomor 12, dan username *zorobelikapalD13 dengan password zoro_D13* untuk cek nomor 13.
 
-### SCREENSHOOT BUAT NO.12 YANG NGE LYNX SUPERFRANKY LALAL USERNAME LUFFY DOWNLOAD JPG SAMA NO.13 BUKA PAKE USERNAME ZORO YAA MUTH
+Testing Nomor 12
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no12.jpeg">
+
+Testing Nomor 13
+
+<img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no13.jpeg">
 
 
