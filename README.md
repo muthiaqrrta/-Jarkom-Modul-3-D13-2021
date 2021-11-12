@@ -404,16 +404,40 @@ Melakukan restart service squid dengan `service squid restart`. Setelah itu menc
 
 
 
-## Nomor 12
-Saatnya berlayar! Luffy dan Zoro akhirnya memutuskan untuk berlayar untuk mencari harta karun di super.franky.yyy.com. Tugas pencarian dibagi menjadi dua misi, Luffy bertugas untuk mendapatkan gambar (.png, .jpg), sedangkan Zoro mendapatkan sisanya. Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps .
+## Nomor 12 dan 13
+Saatnya berlayar! Luffy dan Zoro akhirnya memutuskan untuk berlayar untuk mencari harta karun di super.franky.yyy.com. Tugas pencarian dibagi menjadi dua misi, Luffy bertugas untuk mendapatkan gambar (.png, .jpg), sedangkan Zoro mendapatkan sisanya. Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps . Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya.
+
+#### **Pada Node Water7**
+1. Menambahkan konfigurasi berikut pada file squid.conf 
+`include /etc/squid/acl-bandwidth.conf`
+
+2. Setelah itu membuat file baru dengan `vi /etc/squid/acl-bandwidth.conf` dan tambahkan konfigurasi sebagai berikut,
+```
+acl download url_regex -i \.jpg$ \.png$
+
+auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+
+acl luffy proxy_auth luffybelikapala06
+acl zoro proxy_auth zorobelikapala06
+
+delay_pools 2
+delay_class 1 1
+delay_parameters 1 1250/1250
+delay_access 1 allow luffy
+delay_access 1 deny zoro
+delay_access 1 allow download
+delay_access 1 deny all
+
+#Nomor 13
+delay_class 2 1
+delay_parameters 2 -1/-1
+delay_access 2 allow zoro
+delay_access 2 deny luffy
+delay_access 2 deny all
+```
+
+3. Melakukan restart squid dengan perintah `service squid restart`. Kemudian mencoba cek konfigurasi dengan mengakses halaman super.franky.a06.com melalui perintah `lynx super.franky.D13.com` pada **Node Loguetown** dengan username *luffybelikapalD13 dengan password luffy_D13* untuk nomor 12, dan username *zorobelikapalD13 dengan password zoro_D13* untuk cek nomor 13.
+
+### SCREENSHOOT BUAT NO.12 YANG NGE LYNX SUPERFRANKY LALAL USERNAME LUFFY DOWNLOAD JPG SAMA NO.13 BUKA PAKE USERNAME ZORO YAA MUTH
 
 
-## Nomor 13
-Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya.
-
-
-
-Keterangan :
-yyy adalah nama kelompok Anda
-Untuk nomor 9, harus htpasswd yang melakukan enkripsi
-Bisa melakukan wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip untuk mendapatkan file untuk super.franky.yyy.com
