@@ -225,6 +225,7 @@ Lalu start bind dengan perintah `service bind9 restart`
 
 ## Nomor 8
 Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
+
 1.**Pada Node EnniesLobby**
 
 ```vi /etc/bind/named.conf.local, kemudian tambahkan konfigurasi sebagai berikut:
@@ -257,16 +258,20 @@ Kemudian Restart squid dengan cara mengetikkan perintah: service squid restart
 
 3.**Pada Node Loguetown**
 `ping jualbelikapal.D13.com` untuk mengecek konfigurasi pembuatan domain, Lalu lakukan konfigurasi proxy dengan mengaktifkan proxy sebagai berikut **export http_proxy="http://ip-proxy-server:port"**. Menggunakan ip `export http_proxy="http://192.198.2.3:5000"` dan menggunakan domain `export http_proxy="http://jualbelikapal.D13.com:5000"` . Adapun untuk memeriksa apakah konfigurasi proxy pada client berhasil, silahkan lakukan perintah berikut `env | grep -i proxy`. Berikut merupakan hasil gambar pengecekannya:
+### Screenshoot no 8 yang export http proxy
 
 ## Nomor 9
-Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy (9). 
+Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy. 
+
 1.**Pada Node Water7** membuat user & password dengan enskripsi md5 dengan dua username
 >> username luffybelikapalD13 -> pass: luffy_D13
 `htpasswd -cbmm /etc/squid/passwd luffybelikapalD13 luffy_D13` 
 
 >> username zorobelikapalD13 -> pass: zoro_D13
 `htpasswd -bm /etc/squid/passwd zorobelikapalD13 zoro_D13` 
-Setelah itu melakukan edit file dengan `vi /etc/squid/squid.conf` dan tambahkan konfigurasi berikut
+
+
+2.Setelah itu melakukan edit file dengan `vi /etc/squid/squid.conf` dan tambahkan konfigurasi berikut
 ```auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
 auth_param basic children 5
 auth_param basic realm Proxy
@@ -275,11 +280,33 @@ auth_param basic casesensitive on
 acl USERS proxy_auth REQUIRED
 http_access allow USERS
 ```
-dan Restart squid dengan `service squid restart`. Setelah itu bisa **Testing** dengan mencoba akses web http://its.ac.id dengan perintah lynx http://its.ac.id . Maka kemudian akan di arahkan ke halaman login, isikan dengan username & password yang telah dibuat.
+3.dan Restart squid dengan `service squid restart`. Setelah itu bisa **Testing** dengan mencoba akses web http://its.ac.id dengan perintah lynx http://its.ac.id . Maka kemudian akan di arahkan ke halaman login, isikan dengan username & password yang telah dibuat.
+### Screenshoot no 9 yang itu password username ya muth sama ape namanye https its.ac.id km tolong lynx in
 
 
 ## Nomor 10
 Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00) (10).
+
+1. **Pada Node Water7** untuk membatasi waktu akses. langkah awal adalah membat file baru bernama *acl.conf* di folder squid dengan perintah `vi /etc/squid/acl.conf`
+2.  Tambahkan konfigurasi sebagai berikut,
+
+```
+acl AVAILABLE_WORKING time MTWH 07:00-11:00
+acl AVAILABLE_WORKING_2 time TWHF 17:00-23:59
+acl AVAILABLE_WORKING_3 time WHFA 00:00-03:00
+```
+3. kemudian jalankan `vi /etc/squid/squid.conf` dan tambahkan konfigurasi berikut,
+
+```
+include /etc/squid/acl.conf
+http_access allow USERS AVAILABLE_WORKING
+http_access allow USERS AVAILABLE_WORKING_2
+http_access allow USERS AVAILABLE_WORKING_3
+```
+
+4. Kemudian tak lupa lakukan restart squid dengan perintah `service squid restart`. 
+5. Setelah itu mencoba untuk mengakses web http://its.ac.id atau google.com diluar waktu yang dibatasi. Maka akan muncul halaman error sebagai berikut
+### SCREENSHOOT ITU NGEAKSES YG FORBIDDEN INI BISA GOOGLE/ITS TERSERAH 
 
 ## Nomor 11
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie (11).
