@@ -260,6 +260,22 @@ Kemudian Restart squid dengan cara mengetikkan perintah: service squid restart
 
 ## Nomor 9
 Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy (9). 
+1.**Pada Node Water7** membuat user & password dengan enskripsi md5 dengan dua username
+>> username luffybelikapalD13 -> pass: luffy_D13
+`htpasswd -cbmm /etc/squid/passwd luffybelikapalD13 luffy_D13` 
+
+>> username zorobelikapalD13 -> pass: zoro_D13
+`htpasswd -bm /etc/squid/passwd zorobelikapalD13 zoro_D13` 
+Setelah itu melakukan edit file dengan `vi /etc/squid/squid.conf` dan tambahkan konfigurasi berikut
+```auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+auth_param basic children 5
+auth_param basic realm Proxy
+auth_param basic credentialsttl 2 hours
+auth_param basic casesensitive on
+acl USERS proxy_auth REQUIRED
+http_access allow USERS
+```
+dan Restart squid dengan `service squid restart`
 
 ## Nomor 10
 Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00) (10).
