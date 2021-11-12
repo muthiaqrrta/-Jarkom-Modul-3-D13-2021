@@ -12,6 +12,73 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
 
 ![image](https://user-images.githubusercontent.com/68548653/141451885-8fc09077-49e7-4d7b-9a0f-3b3e8cac03ae.png)
 
+1. Tambahkan switch, host, router, dan NAT yang diperlukan.
+2. Kemudian setiap node saling dihubungkan menggunakan fitur `Add a link`
+3. Lalu lakukan setting network pada setiap node dengan fitur `edit network configuration` seperti berikut. 
+   - Foosha
+   ```
+   auto eth0
+   iface eth0 inet dhcp
+    
+   auto eth1
+   iface eth1 inet static
+      address 192.198.1.1
+    	netmask 255.255.255.0
+    
+   auto eth2
+   iface eth2 inet static
+    	address 192.198.2.1
+    	netmask 255.255.255.0
+   ```
+   - Loguetown
+   ```
+   auto eth0
+   iface eth0 inet static
+	   address 192.198.1.2
+	   netmask 255.255.255.0
+	   gateway 192.198.1.1
+   ```
+   - Alabasta
+   ```
+   auto eth0
+   iface eth0 inet static
+      address 192.198.1.3
+      netmask 255.255.255.0
+      gateway 192.198.1.1
+   ```
+   - EniesLobby
+   ```
+   auto eth0
+   iface eth0 inet static
+      address 192.198.2.2
+      netmask 255.255.255.0
+      gateway 192.198.2.1
+   ```
+   - Water7
+   ```
+   auto eth0
+   iface eth0 inet static
+      address 192.198.2.3
+      netmask 255.255.255.0
+      gateway 192.198.2.1
+   ```
+   - Skypie
+   ```
+   auto eth0
+   iface eth0 inet static
+      address 192.198.2.4
+      netmask 255.255.255.0
+      gateway 192.198.2.1
+   ```
+   - Tottolan
+   ```
+   
+   ```
+4. Setelah itu restart semua node
+5. Kemudian, masukkan `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.198.0.0/16` pada Foosha
+6. Lalu masukkan `echo nameserver 192.168.122.1 > /etc/resolv.conf` pada semua console node.
+7. Kemudian test ping google.com
+
 Ada beberapa kriteria yang ingin dibuat oleh Luffy dan Zoro, yaitu:
 Semua client yang ada HARUS menggunakan konfigurasi IP dari DHCP Server.
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.20 - [prefix IP].1.99 dan [prefix IP].1.150 - [prefix IP].1.169 (3)
