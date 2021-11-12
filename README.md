@@ -90,7 +90,7 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
    ```
 4. Setelah itu restart semua node
 5. Kemudian, masukkan `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.198.0.0/16` pada Foosha
-6. Lalu masukkan `echo nameserver 192.168.122.1 > /etc/resolv.conf` pada semua console node.
+6. Lalu masukkan `echo nameserver 192.198.122.1 > /etc/resolv.conf` pada semua console node.
 7. Kemudian test ping google.com
 
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/ping%20google.jpeg">
@@ -103,7 +103,7 @@ Buat file script.sh kemudian isikan perintah berikut.
 ip a
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.186.0.0/16
 cat /etc/resolv.conf
-echo nameserver 192.168.122.1 > /etc/resolv.conf
+echo nameserver 192.198.122.1 > /etc/resolv.conf
 apt-get update
 apt-get install isc-dhcp-relay -y
 
@@ -124,7 +124,7 @@ service isc-dhcp-relay restart
 
 Buat file script.sh kemudian isikan perintah berikut.
 ```
-echo ‘nameserver 192.168.122.1’ > /etc/resolv.conf
+echo ‘nameserver 192.198.122.1’ > /etc/resolv.conf
 apt-get update 
 apt-get install bind9 -y
 ```
@@ -133,7 +133,7 @@ apt-get install bind9 -y
 
 Buat file script.sh kemudian isikan perintah berikut.
 ```
-echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
+echo 'nameserver 192.198.122.1' >  /etc/resolv.conf
 apt-get update
 apt-get install isc-dhcp-server -y
 ```
@@ -142,7 +142,7 @@ apt-get install isc-dhcp-server -y
 
 Buat file script.sh kemudian isikan perintah berikut.
 ```
-echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
+echo 'nameserver 192.198.122.1' >  /etc/resolv.conf
 apt-get update
 apt-get install squid -y
 ```
@@ -207,7 +207,7 @@ subnet 192.198.3.0 netmask 255.255.255.0 {
 # konfigurasi untuk no 7
 host Skypie {
     hardware ethernet 56:c5:59:f7:95:d0;
-    fixed-address 192.186.3.69;
+    fixed-address 192.198.3.69;
 }
 ```
 
@@ -217,7 +217,7 @@ Pada node EniesLobby
 Buka file /etc/bind/named.conf.options dan tambahkan forwarders
 ```
 forwarders {
-       	192.168.122.1;
+       	192.198.122.1;
 };
 ```
 
