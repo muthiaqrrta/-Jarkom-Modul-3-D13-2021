@@ -95,6 +95,7 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
 
 ### Instalasi
 - Foosha
+
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 ip a
@@ -127,6 +128,7 @@ apt-get install bind9 -y
 ```
 
 - Jipangu 
+
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
@@ -135,6 +137,7 @@ apt-get install isc-dhcp-server -y
 ```
 
 - Water7
+
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
