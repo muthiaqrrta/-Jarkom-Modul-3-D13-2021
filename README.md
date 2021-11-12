@@ -102,21 +102,23 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.186.0.0/16
 cat /etc/resolv.conf
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 apt-get update
-apt-get install isc-dhcp-relay –y
+apt-get install isc-dhcp-relay -y
 
-echo ‘# What servers should the DHCP relay forward requests to?
-SERVERS="192.186.2.4"
+echo '# What servers should the DHCP relay forward requests to?
+SERVERS="192.198.2.4"
 
 # On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
 INTERFACES="eth1 eth2 eth3"
 
 # Additional options that are passed to the DHCP relay daemon?
-OPTIONS="" ‘> /etc/default/isc-dhcp-relay
+OPTIONS="" '> /etc/default/isc-dhcp-relay
+
 echo 'net.ipv4.ip_forward=1'>/etc/sysctl.conf
 
 service isc-dhcp-relay restart
 ```
-- EniesLobby (.bashrc) dhcp-relay
+- EniesLobby
+
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 echo ‘nameserver 192.168.122.1’ > /etc/resolv.conf
@@ -124,7 +126,7 @@ apt-get update
 apt-get install bind9 -y
 ```
 
-- Jipangu (.bashrc) dhcp server
+- Jipangu 
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
@@ -132,7 +134,7 @@ apt-get update
 apt-get install isc-dhcp-server -y
 ```
 
-- Water7(.bashrc) proxy
+- Water7
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 echo 'nameserver 192.168.122.1' >  /etc/resolv.conf
