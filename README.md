@@ -145,6 +145,71 @@ apt-get update
 apt-get install squid -y
 ```
 
+Kemudian pada node Jipangu 
+buka file dengan perintah `vi /etc/default/isc-dhcp-server` kemudian edit file dengan menambahkan 
+```
+INTERFACES="eth0"
+```
+kemudian buka file lain dengan perintah `vi /etc/dhcp/dhcpd.conf` dan edit seperti dibawah ini
+```
+ddns-update-style none;
+
+# option definitions common to all supported networks...
+option domain-name "example.org";
+option domain-name-servers ns1.example.org, ns2.example.org;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+#authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+subnet 192.198.2.0 netmask 255.255.255.0 {
+}
+
+subnet 192.198.1.0 netmask 255.255.255.0 {
+	range 192.198.1.20 192.198.1.99;
+	range 192.198.1.150 192.198.1.169;
+	option routers 192.198.1.1;
+	option broadcast-address 192.198.1.255;
+	option domain-name-servers 192.198.2.2, 192.198.122.1;
+	default-lease-time 360;
+	max-lease-time 7200;
+}
+
+subnet 192.198.3.0 netmask 255.255.255.0 {
+	range 192.198.3.30 192.198.3.50;
+	option routers 192.198.3.1;
+	option broadcast-address 192.198.3.255;
+	option domain-name-servers 192.198.2.2;
+	default-lease-time 720;
+	max-lease-time 7200;
+}
+
+host Skypie {
+    hardware ethernet 56:c5:59:f7:95:d0;
+    fixed-address 192.186.3.69;
+}
+```
+
+Kemudian restart dhcp server dengan perintah `service isc-dhcp-server restart`
+
+Pada node EniesLobby 
+Buka file /etc/bind/named.conf.options dan tambahkan forwarders
+```
+forwarders {
+       	192.168.122.1;
+};
+
+```
+
+Lalu start bind dengan perintah `service bind9 restart`
+
 Ada beberapa kriteria yang ingin dibuat oleh Luffy dan Zoro, yaitu:
 Semua client yang ada HARUS menggunakan konfigurasi IP dari DHCP Server.
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.20 - [prefix IP].1.99 dan [prefix IP].1.150 - [prefix IP].1.169 (3)
