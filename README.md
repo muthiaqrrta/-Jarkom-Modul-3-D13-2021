@@ -19,16 +19,20 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
    ```
    auto eth0
    iface eth0 inet dhcp
-    
+   
    auto eth1
    iface eth1 inet static
-      address 192.198.1.1
-    	netmask 255.255.255.0
-    
+   	address 192.198.1.1
+	netmask 255.255.255.0
    auto eth2
    iface eth2 inet static
-    	address 192.198.2.1
-    	netmask 255.255.255.0
+	address 192.198.2.1
+	netmask 255.255.255.0
+
+   auto eth3
+   iface eth3 inet static
+	address 192.198.3.1
+	netmask 255.255.255.0
    ```
    - Loguetown
    ```
@@ -70,9 +74,18 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
       netmask 255.255.255.0
       gateway 192.198.2.1
    ```
-   - Tottolan
+   - Tottoland
    ```
-   
+   auto eth0
+   iface eth0 inet dhcp
+   ```
+   - Jipangu
+   ```
+   auto eth0
+   iface eth0 inet static
+	address 192.198.2.4
+	netmask 255.255.255.0
+	gateway 192.198.2.1
    ```
 4. Setelah itu restart semua node
 5. Kemudian, masukkan `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.198.0.0/16` pada Foosha
