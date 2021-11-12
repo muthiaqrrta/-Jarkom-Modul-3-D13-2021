@@ -27,68 +27,68 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
 	netmask 255.255.255.0
    auto eth2
    iface eth2 inet static
-	address 192.198.2.1
+   	address 192.198.2.1
 	netmask 255.255.255.0
 
    auto eth3
    iface eth3 inet static
-	address 192.198.3.1
+   	address 192.198.3.1
 	netmask 255.255.255.0
    ```
    - Loguetown
    ```
    auto eth0
    iface eth0 inet static
-	   address 192.198.1.2
-	   netmask 255.255.255.0
-	   gateway 192.198.1.1
+   	address 192.198.1.2
+	netmask 255.255.255.0
+	gateway 192.198.1.1
    ```
    - Alabasta
    ```
    auto eth0
    iface eth0 inet static
-      address 192.198.1.3
-      netmask 255.255.255.0
-      gateway 192.198.1.1
+   	address 192.198.1.3
+	netmask 255.255.255.0
+	gateway 192.198.1.1
    ```
    - EniesLobby
    ```
    auto eth0
    iface eth0 inet static
-      address 192.198.2.2
-      netmask 255.255.255.0
-      gateway 192.198.2.1
+   	address 192.198.2.2
+	netmask 255.255.255.0
+	gateway 192.198.2.1
    ```
    - Water7
    ```
    auto eth0
    iface eth0 inet static
-      address 192.198.2.3
-      netmask 255.255.255.0
-      gateway 192.198.2.1
+   	address 192.198.2.3
+	netmask 255.255.255.0
+	gateway 192.198.2.1
    ```
    - Skypie
    ```
    auto eth0
    iface eth0 inet static
-      address 192.198.2.4
-      netmask 255.255.255.0
-      gateway 192.198.2.1
+   	address 192.198.2.4
+	netmask 255.255.255.0
+	gateway 192.198.2.1
    ```
    - Tottoland
    ```
    auto eth0
    iface eth0 inet static
-  	address 192.198.3.2
-  	netmask 255.255.255.0
-  	gateway 192.198.3.1
+   	address 192.198.3.2
+	netmask 255.255.255.0
+	gateway 192.198.3.1
 
    ```
    - Jipangu
    ```
    auto eth0
    iface eth0 inet static
-	address 192.198.2.4
+   	address 192.198.2.4
 	netmask 255.255.255.0
 	gateway 192.198.2.1
    ```
@@ -161,7 +161,7 @@ Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch1 
 	
 Luffy dan Zoro berencana menjadikan Skypie sebagai server untuk jual beli kapal yang dimilikinya dengan alamat IP yang tetap dengan IP [prefix IP].3.69 (7). Loguetown digunakan sebagai client Proxy agar transaksi jual beli dapat terjamin keamanannya, juga untuk mencegah kebocoran data transaksi.
 
-
+**Jawaban**
 Pada node Jipangu 
 buka file dengan perintah `vi /etc/default/isc-dhcp-server` kemudian edit file dengan menambahkan 
 ```
@@ -228,6 +228,7 @@ forwarders {
 Lalu start bind dengan perintah `service bind9 restart`
 
 Lakukan testing dengan perintah `ip a`
+
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/ip%20a%20skypie.jpeg">
 
 ## Nomor 8
