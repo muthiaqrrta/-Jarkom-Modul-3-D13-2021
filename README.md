@@ -78,7 +78,11 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
    - Tottoland
    ```
    auto eth0
-   iface eth0 inet dhcp
+   iface eth0 inet static
+  	address 192.198.3.2
+  	netmask 255.255.255.0
+  	gateway 192.198.3.1
+
    ```
    - Jipangu
    ```
