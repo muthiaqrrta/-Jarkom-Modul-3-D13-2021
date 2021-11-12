@@ -10,6 +10,8 @@ Raihan Alifianto | 05111940000213
 ## Soal dan Jawaban
 Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby sebagai DNS Server, Jipangu sebagai DHCP Server, Water7 sebagai Proxy Server (1), dan Foosha sebagai DHCP Relay (2). Luffy dan Zoro menyusun peta tersebut dengan hati-hati dan teliti.
 
+![image](https://user-images.githubusercontent.com/68548653/141451885-8fc09077-49e7-4d7b-9a0f-3b3e8cac03ae.png)
+
 Ada beberapa kriteria yang ingin dibuat oleh Luffy dan Zoro, yaitu:
 Semua client yang ada HARUS menggunakan konfigurasi IP dari DHCP Server.
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.20 - [prefix IP].1.99 dan [prefix IP].1.150 - [prefix IP].1.169 (3)
