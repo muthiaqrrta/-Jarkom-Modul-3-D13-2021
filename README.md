@@ -275,7 +275,8 @@ auth_param basic casesensitive on
 acl USERS proxy_auth REQUIRED
 http_access allow USERS
 ```
-dan Restart squid dengan `service squid restart`
+dan Restart squid dengan `service squid restart`. Setelah itu bisa **Testing** dengan mencoba akses web http://its.ac.id dengan perintah lynx http://its.ac.id . Maka kemudian akan di arahkan ke halaman login, isikan dengan username & password yang telah dibuat.
+
 
 ## Nomor 10
 Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00) (10).
