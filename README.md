@@ -311,6 +311,98 @@ http_access allow USERS AVAILABLE_WORKING_3
 ## Nomor 11
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie.
 
+#### ** Pada Node Ennieslobby**
+1.  jalankan `vi /etc/bind/named.conf.local`dan tambahkan konfigurasi sebagai berikut,
+```
+zone "super.franky.D13.com" {
+        type master;
+        file "/etc/bind/sunnygo/super.franky.D13.com";
+};
+```
+
+2. Kemudian membuat folder sunnygo dengan perintah `mkdir sunnygo` dan meng-*copy* file /etc/bind/db.local ke dalam folder sunnygo dan ubah namanya menjadi super.franky.D13.com dengan perintah `cp /etc/bind/db.local /etc/bind/sunnygo/super.franky.D13.com`
+3. Selanjutnya menyesuaikan konfigurasi pada file super.franky.D13.com seperti berikut,
+```
+\$TTL    604800
+@       IN      SOA     super.franky.D13.com. root.super.franky.D13.com. (
+                        2021100401      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      super.franky.D13.com.
+@       IN      A       192.198.3.69
+WWW	IN	CNAME	super.franky.D13.com.
+
+```
+
+4. Melakukan restart bind dengan perintah `service bind9 restart`
+
+#### ** Pada Node Skypie**
+Melakukan install apache2, wget, unzip dengan perintah
+```
+apt-get update
+apt-get install apache2 -y
+apt-get install wget -y
+apt-get install unzip -y
+```
+dan men-start apache2 dengan `service apache2 start`. Kemudian berpindah pada directory /var/www dengan command `cd /var/www` dan membuat sebuah directory baru di dalam var/www dengan nama super.franky.D13.com, pada directory tersebut lakukan pengunduhan file https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip .juga melakukan unzip, kemudian memindahkan atau mencopy isi file zip. 
+```
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip -O /root/super.franky.zip
+unzip -o /root/super.franky.zip -d  /root
+cp -r /root/super.franky/. /var/www/super.franky.D13.com/
+```
+Kemudian menambahkan konfigurasi pada `/etc/apache2/sites-available/super.franky.t07.com.conf`,
+```
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.D13.com
+        ServerName super.franky.D13.com
+	ServerAlias super.franky.D13.com
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+        <Directory /var/www/super.franky.t07.com/public>
+                Options +Indexes
+        </Directory>
+</VirtualHost>
+```
+Lalu command 
+```
+a2ensite super.franky.t07.com
+a2dissite 000-default  
+```
+dan Melakukan restart service apache2 dengan `service apache2 restart`
+
+#### **Pada Node Water7**
+Menambahkan konfigurasi pada `/etc/squid/squid.conf` sebagai berikut,
+```
+http_port 5000
+visible_hostname super.franky.D13.com
+
+auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+auth_param basic children 5
+auth_param basic realm Proxy
+auth_param basic credentialsttl 2 hours
+auth_param basic casesensitive on
+acl USERS proxy_auth REQUIRED
+#http_access allow USERS
+
+acl site dstdomain .google.com 
+deny_info http://super.franky.D13.com/ site
+http_reply_access deny site
+
+# pembatasan waktu akses
+#include /etc/squid/acl.conf
+#http_access allow USERS AVAILABLE_WORKING
+#http_access allow USERS AVAILABLE_WORKING_2
+#http_access allow USERS AVAILABLE_WORKING_3
+#http_access deny all
+```
+Melakukan restart service squid dengan `service squid restart`. Setelah itu mencoba `lynx google.com` atau `lynx super.franky.D13.com` pada **Node Loguetown**:
+### SCREENSHOT LYNX GOOGLE ATO SUPERFRANKY LALALA YG BERHASIL
+
+
 
 ## Nomor 12
 Saatnya berlayar! Luffy dan Zoro akhirnya memutuskan untuk berlayar untuk mencari harta karun di super.franky.yyy.com. Tugas pencarian dibagi menjadi dua misi, Luffy bertugas untuk mendapatkan gambar (.png, .jpg), sedangkan Zoro mendapatkan sisanya. Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps .
