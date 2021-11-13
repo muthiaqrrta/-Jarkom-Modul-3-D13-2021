@@ -474,3 +474,4 @@ delay_access 2 deny all
 ## Kendala
 - Terdapat permasalahan ketika import dan export project sehingga project hanya dapat dijalankan di laptop yang membuat topo 
 - Terdapat anggota yang mengalami error ketika membuka web console dari node yang ada di topo
+- Terdapat error di nomor 11 karena package yang digunakan tidak dapat terinstall
