@@ -471,3 +471,5 @@ delay_access 2 deny all
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no13.jpeg">
 
 
+## Kendala
+- Terdapat permasalahan ketika import dan export project sehingga project hanya dapat dijalankan di laptop yang membuat topo 
