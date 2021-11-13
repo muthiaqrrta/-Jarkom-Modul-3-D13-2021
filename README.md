@@ -332,7 +332,7 @@ http_access allow USERS AVAILABLE_WORKING_3
 ## Nomor 11
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie .
 
-#### ** Pada Node Ennieslobby **
+#### **Pada Node Ennieslobby**
 1.  jalankan `vi /etc/bind/named.conf.local`dan tambahkan konfigurasi sebagai berikut,
 ```
 zone "super.franky.D13.com" {
