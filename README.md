@@ -105,7 +105,7 @@ Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby se
 Buat file script.sh kemudian isikan perintah berikut.
 ```
 ip a
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.186.0.0/16
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.198.0.0/16
 cat /etc/resolv.conf
 echo nameserver 192.198.122.1 > /etc/resolv.conf
 apt-get update
