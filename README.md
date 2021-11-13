@@ -441,8 +441,8 @@ acl download url_regex -i \.jpg$ \.png$
 
 auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
 
-acl luffy proxy_auth luffybelikapala06
-acl zoro proxy_auth zorobelikapala06
+acl luffy proxy_auth luffybelikapalD13
+acl zoro proxy_auth zorobelikapalD13
 
 delay_pools 2
 delay_class 1 1
@@ -460,7 +460,7 @@ delay_access 2 deny luffy
 delay_access 2 deny all
 ```
 
-3. Melakukan restart squid dengan perintah `service squid restart`. Kemudian mencoba cek konfigurasi dengan mengakses halaman super.franky.a06.com melalui perintah `lynx super.franky.D13.com` pada **Node Loguetown** dengan username *luffybelikapalD13 dengan password luffy_D13* untuk nomor 12, dan username *zorobelikapalD13 dengan password zoro_D13* untuk cek nomor 13.
+3. Melakukan restart squid dengan perintah `service squid restart`. Kemudian mencoba cek konfigurasi dengan mengakses halaman super.franky.D13.com melalui perintah `lynx super.franky.D13.com` pada **Node Loguetown** dengan username *luffybelikapalD13 dengan password luffy_D13* untuk nomor 12, dan username *zorobelikapalD13 dengan password zoro_D13* untuk cek nomor 13.
 
 **Testing Nomor 12**
 
