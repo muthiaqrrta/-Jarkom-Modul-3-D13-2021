@@ -233,14 +233,8 @@ Lakukan testing dengan perintah `ip a`
 
 ## Nomor 8
 Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
-1. ** Pada Nove Water7** dalam `/etc/squid/squid.conf` tambahkan konfigurasi
 
-```
-http_port 5000
-visible_hostname super.franky.D13.com
-```
-
-2.**Pada Node EnniesLobby**
+1.**Pada Node EnniesLobby**
 
 ```vi /etc/bind/named.conf.local, kemudian tambahkan konfigurasi sebagai berikut:
 zone "jualbelikapal.D13.com" {
@@ -264,13 +258,15 @@ WWW		IN	CNAME	 super.franky.D13.com.
 ```
 setelah itu lakukan restart bind9 dengan perintah service bind9 restart
 
-3.**Pada Node Water7**
+2.**Pada Node Water7**
 `vi /etc/squid/squid.conf` lalu tambahkan konfigurasi berikut,
+```
 http_port 5000
 visible_hostname jualbelikapal.D13.com
-Kemudian Restart squid dengan cara mengetikkan perintah: service squid restart
+```
+Kemudian Restart squid dengan cara mengetikkan perintah: `service squid restart`
 
-4.**Pada Node Loguetown**
+3.**Pada Node Loguetown**
 `ping jualbelikapal.D13.com` untuk mengecek konfigurasi pembuatan domain, Lalu lakukan konfigurasi proxy dengan mengaktifkan proxy sebagai berikut **export http_proxy="http://ip-proxy-server:port"**. Menggunakan ip `export http_proxy="http://192.198.2.3:5000"` dan menggunakan domain `export http_proxy="http://jualbelikapal.D13.com:5000"` . Adapun untuk memeriksa apakah konfigurasi proxy pada client berhasil, silahkan lakukan perintah berikut `env | grep -i proxy`. Berikut merupakan hasil gambar pengecekannya:
 
 <img src="https://github.com/muthiaqrrta/Jarkom-Modul-3-D13-2021/blob/main/screenshot/no8.jpeg">
